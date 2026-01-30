@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TICNES AI | Inteligência Artificial Aplicada</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="ticnes_ai.png">
+    <style>
+        /* Estilos básicos para garantir funcionamento */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-outline {
+            border: 2px solid #007bff;
+            color: #007bff;
+            background: transparent;
+        }
+        
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo-highlight {
+            color: #007bff;
+        }
+        
+        .nav-desktop ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-desktop a {
+            padding: 10px 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-desktop a:hover {
+            color: #007bff;
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: #333;
+            transition: 0.3s;
+        }
+        
+        /* Menu Mobile */
+        .nav-mobile {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-mobile.active {
+            right: 0;
+        }
+        
+        .nav-mobile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .menu-close {
+            font-size: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .nav-mobile-links {
+            list-style: none;
+        }
+        
+        .nav-mobile-links li {
+            margin-bottom: 20px;
+        }
+        
+        .nav-mobile-links a {
+            display: block;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-mobile-links a:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+            position: relative;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-headline {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subheadline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* Manifesto Section */
+        .manifesto {
+            padding: 100px 20px;
+            background: #fff;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .manifesto-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .manifesto-block {
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+        
+        .manifesto-block:hover {
+            transform: translateY(-5px);
+        }
+        
+        .manifesto-block h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        /* Serviços Section */
+        .servicos {
+            padding: 100px 20px;
+            background: #f8f9fa;
+        }
+        
+        .servicos-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .servico-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .servico-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .servico-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .servico-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .servico-desc {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .servico-details ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        
+        .servico-details li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .servico-details li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        /* Soluções Section */
+        .solucoes {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .solucoes-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .solucao-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .solucao-visual {
+            position: relative;
+            height: 400px;
+        }
+        
+        .solucao-shape {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .solucao-shape img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .solucao-category {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .solucao-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        
+        .solucao-problema,
+        .solucao-solucao,
+        .solucao-beneficio {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .cliente-destaque {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #007bff;
+        }
+        
+        /* Ecossistema Section */
+        .ecossistema {
+            padding: 100px 20px;
+            background: #f8f9fa;
+        }
+        
+        .parceiros-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .parceiro-logo {
+            padding: 40px 20px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .parceiro-logo:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ecossistema-text {
+            max-width: 800px;
+            margin: 50px auto 0;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        /* Contato Section */
+        .contato {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+        }
+        
+        .contato-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contato-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .contato-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+        
+        .contato-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+        }
+        
+        .info-content h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-tagline {
+            margin-top: 15px;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .footer-column h4 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .footer-newsletter input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-social a {
+            margin-left: 20px;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .solucao-block {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero-headline {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .parceiros-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .parceiros-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .solucao-block {
+                padding: 30px 20px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-social a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Avançado -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <div class="logo">  
+                <a href="#hero">
+                    <span class="logo-icon"><img src="ticnes_ai.png" alt="Logo" style="width: 50px; height: auto;"></span>
+                    <span class="logo-text">TICNES<span class="logo-highlight">AI</span></span>
+                </a>
+            </div>
+            
+            <nav class="nav-desktop">
+                <ul>
+                    <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#solucoes" class="nav-link">Soluções IA</a></li>
+                    <li><a href="#ecossistema" class="nav-link">Ecossistema</a></li>
+                    <li><a href="https://portfolio-esm-last-created-mbzd.vercel.app/" id="portfolio-link">Portfólio</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="https://www.linkedin.com/company/ticnes-lda/" class="btn btn-secondary">LINKEDIN</a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Menu Mobile -->
+        <div class="nav-mobile" id="navMobile">
+            <div class="nav-mobile-header">
+                <div class="logo">
+                    <a href="#hero">
+                        <span class="logo-icon"><img src="ticnes_ai.png" alt="tcns"></span>
+                        <span class="logo-text">TICNES<span class="logo-highlight">AI</span></span>
+                    </a>
+                </div>
+                <button class="menu-close" id="menuClose" aria-label="Fechar menu">&times;</button>
+            </div>
+            <ul class="nav-mobile-links">
+                <li><a href="#manifesto" class="nav-link">Manifesto</a></li>
+                <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                <li><a href="#solucoes" class="nav-link">Soluções IA</a></li>
+                <li><a href="https://portfolio-esm-last-created-mbzd.vercel.app/" id="portfolio-link-mobile">Portfólio</a></li>
+                <li><a href="#ecossistema" class="nav-link">Ecossistema</a></li>
+                <li><a href="#contato" class="btn btn-primary">Contactar</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section Assimétrico -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-headline"> 
+                    <span class="line-1">TICNES AI</span>
+                    <span class="line-2">Imagine<span class="highlight"> e faça acontecer com IA</span></span>
+                    <span class="line-3">SEM DESCULPAS!</span>
+                </h1>
+                <p class="hero-subheadline">
+                    Desenvolvemos soluções de inteligência artificial que criam impacto real no seu negócio, 
+                    combinando expertise técnica com visão estratégica.
+                </p>
+                <div class="hero-actions">
+                    <a href="#solucoes" class="btn btn-primary">Explorar Soluções</a>
+                    <a href="#contato" class="btn btn-outline">Agendar Consulta</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="visual-shape shape-1"></div>
+                <div class="visual-shape shape-2"></div>
+                <div class="visual-shape shape-3"></div>
+                <div class="visual-shape shape-4"></div>
+                <div class="hero-abstract">
+                    <div class="abstract-line"></div>
+                    <div class="abstract-circle"></div>
+                    <div class="abstract-dot-grid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Seção Manifesto -->
+    <section class="manifesto" id="manifesto">
+        <div class="section-header">
+            <h2 class="section-title">Não Somos Apenas<br>Uma Empresa de IA</h2>
+            <p class="section-subtitle">Somos arquitetos da transformação digital</p>
+        </div>
+        
+        <div class="manifesto-content">
+            <div class="manifesto-block block-1">
+                <h3>Visão</h3>
+                <p>Tornarmo-nos uma empresa de nível mundial, na área de cibersegurança e inteligência artificial.</p>
+            </div>
+            <div class="manifesto-block block-2">
+                <h3>Missão</h3>
+                <p>Desenvolvimento e Implementação de serviços avançados de segurança para TICs.</p>
+            </div>
+            <div class="manifesto-block block-3">
+                <h3>Valores</h3>
+                <p>Os nossos valores são principalmente os da integridade, excelência operancional, a perseverança, a paixão para fazer a diferença e o desenvolvimento pessoal e profissional.</p>
+            </div>
+            <div class="manifesto-block block-4">
+                <h3>Futuro</h3>
+                <p>Antecipamos tendências e capacitamos organizações para liderarem na nova economia digital.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços Grid Não Uniforme -->
+    <section class="servicos" id="servicos">
+        <div class="section-header">
+            <h2 class="section-title">Serviços Especializados</h2>
+            <p class="section-subtitle">Soluções personalizadas para cada fase da transformação digital</p>
+        </div>
+        
+       <div class="servicos-grid">
+    <div class="servico-card card-large">
+        <div class="servico-icon">💬</div>
+        <h3 class="servico-title">Chatbots Empresariais com IA</h3>
+        <p class="servico-desc">Desenvolvemos assistentes virtuais inteligentes que otimizam o atendimento ao cliente, aumentam vendas e automatizam comunicações internas.</p>
+        <div class="servico-details">
+            <ul>
+                <li>Chatbots para atendimento 24/7</li>
+                <li>Assistentes de vendas inteligentes</li>
+                <li>Suporte automatizado multi-canal</li>
+                <li>Integração com sistemas existentes</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="servico-card card-medium">
+        <div class="servico-icon">🔍</div>
+        <h3 class="servico-title">Solução de Problemas com IA</h3>
+        <p class="servico-desc">Identificamos e resolvemos desafios operacionais e estratégicos utilizando inteligência artificial personalizada para sua empresa.</p>
+        <div class="servico-details">
+            <ul>
+                <li>Diagnóstico de processos ineficientes</li>
+                <li>Otimização de tomada de decisão</li>
+                <li>Análise de gargalos operacionais</li>
+                <li>Soluções personalizadas por setor</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="servico-card card-medium">
+        <div class="servico-icon">⚙️</div>
+        <h3 class="servico-title">Automação de Processos com IA</h3>
+        <p class="servico-desc">Automatizamos fluxos de trabalho complexos, reduzindo custos operacionais e aumentando a produtividade através de IA especializada.</p>
+        <div class="servico-details">
+            <ul>
+                <li>Automação de workflows inteligentes</li>
+                <li>Processamento automatizado de documentos</li>
+                <li>Integração de sistemas com IA</li>
+                <li>Monitoramento e otimização contínua</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Soluções de IA Premium -->
+<section class="solucoes" id="solucoes">
+    <div class="section-header">
+        <h2 class="section-title">Soluções de IA Premium</h2>
+        <p class="section-subtitle">Tecnologia de ponta para desafios complexos</p>
+    </div>
+        
+    <div class="solucoes-container">
+        <div class="solucao-block">
+            <div class="solucao-visual">
+                <div class="solucao-shape"><img src="imj.jpg" alt=""></div>
+            </div>
+            <div class="solucao-content">
+                <span class="solucao-category">Chatbot Empresarial</span>
+                <h3 class="solucao-title">Nossa Seguros Virtual Assist</h3>
+                <p class="solucao-problema">
+                    <strong>Problema:</strong> A Nossa Seguros enfrentava altos volumes de consultas de clientes, tempos de resposta lentos e dificuldade em escalar o atendimento humanizado 24/7 em Angola.
+                </p>
+                <p class="solucao-solucao">
+                    <strong>Solução:</strong> Desenvolvemos um chatbot de IA multilíngue (Português e Inglês) integrado aos sistemas da Nossa, capaz de processar sinistros, explicar apólices, calcular seguros e agendar vistorias automaticamente.
+                </p>
+                <p class="solucao-beneficio">
+                    <strong>Benefício:</strong> Redução de 65% na carga da central de atendimento, respostas em menos de 10 segundos 24/7, e aumento de 30% na satisfação do cliente medido pelo NPS.
+                </p>
+                <div class="cliente-destaque">
+                    <strong>Cliente:</strong> Nossa Seguros Angola • Setor: Seguros • Implementação: <strong>Q1 2025</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+   <!-- Ecossistema & Parcerias -->
+<section class="ecossistema" id="ecossistema">
+    <div class="section-header">
+        <h2 class="section-title">Nossos Clientes & Parcerias</h2>
+        <p class="section-subtitle">Empresas líderes que confiam em nossas soluções</p>
+    </div>
+    
+    <div class="parceiros-container">
+        <div class="parceiro-logo">SONANGOL</div>
+        <div class="parceiro-logo">CLÍNICA SAGRADA ESPERANÇA</div>
+        <div class="parceiro-logo">NOSSA SEGUROS</div>
+        <div class="parceiro-logo">TAAG</div>
+        <div class="parceiro-logo">ENSA SEGUROS</div>
+        <div class="parceiro-logo">BANCO DE FOMENTO</div>
+    </div>
+    
+    <div class="ecossistema-text">
+        <p>Atendemos as maiores empresas de Angola, desenvolvendo soluções de IA personalizadas para os setores de energia, saúde, seguros, aviação e finanças. Nossa expertise em entender as necessidades específicas do mercado angolano nos permite criar tecnologias que realmente impactam o crescimento e eficiência das organizações locais.</p>
+    </div>
+</section>
+    <!-- Contacto Experiência -->
+    <section class="contato" id="contato">
+        <div class="contato-container">
+            <div class="contato-content">
+                <h2 class="contato-title">Vamos Conversar</h2>
+                <p class="contato-subtitle">Estamos prontos para ajudar sua organização a desbloquear o potencial da inteligência artificial.</p>
+                
+                <div class="contato-info">
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <h4>Email</h4>
+                            <p>contacto@ticnes.ai</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h4>Localização</h4>
+                            <p>Luanda, Angola</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⏱️</div>
+                        <div class="info-content">
+                            <h4>Horário</h4>
+                            <p>Segunda - Segunda 24h/24h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Não Genérico -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="logo">
+                    <span class="logo-icon"><img src="ticnes_ai.png" alt="Logo" style="width: 50px; height: auto;"></span>
+                    <span class="logo-text">TICNES<span class="logo-highlight">AI</span></span>
+                </div>
+                <p class="footer-tagline">Transformando dados em inteligência competitiva.</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#servicos">IA Aplicada</a></li>
+                        <li><a href="#servicos">Ciência de Dados</a></li>
+                        <li><a href="#servicos">Automação</a></li>
+                        <li><a href="#servicos">Consultoria</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#manifesto">Manifesto</a></li>
+                        <li><a href="#ecossistema">Parcerias</a></li>
+                        <li><a href="#contato">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacidade</a></li>
+                        <li><a href="#">Termos</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Ética em IA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Fique Atualizado</h4>
+                <p>Receba insights sobre IA e transformação digital.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Seu email">
+                    <button type="submit" class="btn btn-secondary">Subscrever</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2015 TICNES AI. Todos os direitos reservados.</p>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/company/ticnes-lda/posts/?feedView=all" aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://github.com/Mulodji" aria-label="GitHub">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript embutido para garantir funcionamento
+        
+        // Menu mobile functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const navMobile = document.getElementById('navMobile');
+        
+        if (menuToggle && navMobile) {
+            menuToggle.addEventListener('click', function() {
+                navMobile.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (menuClose && navMobile) {
+            menuClose.addEventListener('click', function() {
+                navMobile.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Fechar menu mobile ao clicar em links
+        const mobileLinks = document.querySelectorAll('.nav-mobile-links a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (navMobile) {
+                    navMobile.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        
+        // Smooth scroll for internal links ONLY
+        document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only prevent default for internal links (#)
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = href;
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL
+                        if (history.pushState) {
+                            history.pushState(null, null, targetId);
+                        } else {
+                            location.hash = targetId;
+                        }
+                    }
+                }
+                // External links will follow normally
+            });
+        });
+        
+        // FORÇAR O LINK DO PORTFÓLIO A FUNCIONAR
+        const portfolioLinkDesktop = document.getElementById('portfolio-link');
+        const portfolioLinkMobile = document.getElementById('portfolio-link-mobile');
+        
+        // Para desktop - SIMPLES E DIRETO
+        if (portfolioLinkDesktop) {
+            portfolioLinkDesktop.addEventListener('click', function(e) {
+                console.log('Portfolio desktop link clicked');
+                // NÃO preventDefault - deixa o link seguir normalmente
+                // window.location.href = this.href;
+            });
+        }
+        
+        // Para mobile - SIMPLES E DIRETO
+        if (portfolioLinkMobile) {
+            portfolioLinkMobile.addEventListener('click', function(e) {
+                console.log('Portfolio mobile link clicked');
+                // NÃO preventDefault - deixa o link seguir normalmente
+                // window.location.href = this.href;
+            });
+        }
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', function(e) {
+            if (navMobile && navMobile.classList.contains('active') && 
+                !navMobile.contains(e.target) && 
+                e.target !== menuToggle) {
+                navMobile.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Correção FINAL para o link do portfólio - FORÇA TOTAL
+        function forcePortfolioLink() {
+            const portfolioLinks = document.querySelectorAll('a[href="https://portfolio-esm-last-created-mbzd.vercel.app/"]');
+            
+            portfolioLinks.forEach(link => {
+                // Remove qualquer evento anterior
+                const newLink = link.cloneNode(true);
+                link.parentNode.replaceChild(newLink, link);
+                
+                // Adiciona um evento que garante o funcionamento
+                newLink.addEventListener('click', function(e) {
+                    console.log('Portfolio link forced to work');
+                    // Remove qualquer classe que possa estar interferindo
+                    this.className = '';
+                    // Força a navegação
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 50);
+                });
+            });
+        }
+        
+        // Executa a correção quando a página carrega
+        document.addEventListener('DOMContentLoaded', forcePortfolioLink);
+        
+        // E também depois de um tempo, só para garantir
+        setTimeout(forcePortfolioLink, 1000);
+    </script>
+</body>
+</html>
